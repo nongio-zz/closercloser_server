@@ -1,11 +1,12 @@
 #!/usr/bin/env ruby
-
+require 'rubygems'
 require 'active_record'
-require 'sqlite3'
+require 'mysql'
 
 ActiveRecord::Base.establish_connection(
-  adapter:  'sqlite3', # or 'postgresql' or 'sqlite3'
-  database: 'closercloser_test.db'
+  adapter:  'mysql', # or 'postgresql' or 'sqlite3'
+  database: 'closercloser',
+  username: "riccardo"
 )
 
 class Coords < ActiveRecord::Base
