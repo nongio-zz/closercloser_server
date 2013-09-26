@@ -4,7 +4,7 @@ require 'socket'
 require './db.rb'
 require 'timeout'
 
-port = 8080
+port = 3339
 puts "starting server on port #{port}"
 
 server = TCPServer.new port # Server bind to port 2000
