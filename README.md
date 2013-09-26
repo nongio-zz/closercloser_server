@@ -1,4 +1,4 @@
-closercloser_server
+closercloser tcp server for the closercloser installation
 ===================
 
-small ruby tcpserver for osc forward
+this is a very simple ruby tcp server implementation
