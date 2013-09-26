@@ -13,7 +13,7 @@ def receiver(from, client)
 	puts "setting up new reciver from: #{from}"
 	while ! client.closed?
 			begin 
-				Timeout::timeout(5) do
+				#Timeout::timeout(5) do
 					coords = client.gets( "\n" )
 					if ! coords.nil?
 						coords = coords.chomp( "\n" )
@@ -35,7 +35,7 @@ def receiver(from, client)
 							end
 						
 					end
-				end
+				#end
 			rescue Timeout::Error
 				puts "Timed out!"
 				break
