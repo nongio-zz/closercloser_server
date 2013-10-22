@@ -8,7 +8,8 @@ ActiveRecord::Schema.define do
 		table.column :n, :integer
 		table.column :x, :integer
 		table.column :y, :integer
-		table.column :time, :datetime
+		table.column :value, :boolean
+        table.column :time, :datetime
 		table.column :ms, :integer
 		table.column :sent, :boolean
 	end

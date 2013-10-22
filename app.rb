@@ -23,14 +23,14 @@ def receiver(from, client)
 					end
 					
 					coords = coords.split(",")
-					if coords.size > 0 && !coords[4].nil?
+					if coords.size > 0 && !coords[5].nil?
 						
-						date_parts = coords[4].split(":")
+						date_parts = coords[5].split(":")
 						ms = date_parts.pop
 						date_string = date_parts.join(":")
 						t = DateTime.strptime(date_string, "%Y-%m-%d %H:%M:%S") 
 							Coords.transaction do 
-								c = Coords.create(:from => from[-2,2], :n => coords[1], :x => coords[2], :y => coords[3], :time => t, :ms => ms, :sent => false)
+								c = Coords.create(:from => from[-2,2], :n => coords[1], :x => coords[2], :y => coords[3], :value => coords[4], :time => t, :ms => ms, :sent => false)
 								c.save
 							end
 						
@@ -80,11 +80,13 @@ loop do
 			puts "request:" + request_type + ";"
 			if(request_type.match(/GET/i))
 				puts "ok here you are\n"
-				sender "FI", client
+				parts = request_type.split ":"
+				sender parts[1], client
 			end
 			if(request_type.match(/PUT/i))
 				puts "give me something\n"
-				receiver "FI", client
+				parts = request_type.split ":"
+				receiver parts[1], client
 			end
 	end
   
