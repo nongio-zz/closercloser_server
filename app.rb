@@ -24,7 +24,6 @@ def receiver(from, client)
 					
 					coords = coords.split(",")
 					if coords.size > 0 && !coords[5].nil?
-						
 						date_parts = coords[5].split(":")
 						ms = date_parts.pop
 						date_string = date_parts.join(":")
@@ -51,14 +50,14 @@ end
 def sender(of, client)
 	while (! client.closed?)
 			coords = []
-			Coords.transaction do 
+			Coords.transaction do
 				coords = Coords.where(:from => of, :sent => false).order("time ASC")
 			end
 			while(coords.size >= 1)
 					Coords.transaction do 
 						c = coords.pop
 						begin
-							client.puts "#{c.n},#{c.x},#{c.y},#{c.time.strftime("%Y-%m-%d %H:%M:%S")},#{sprintf '%03d', c.ms}\n"
+							client.puts "#{c.n},#{c.x},#{c.y},#{c.value},#{c.time.strftime("%Y-%m-%d %H:%M:%S")},#{sprintf '%03d', c.ms}\n"
 							c.sent = true
 							c.save
 						rescue
@@ -79,13 +78,13 @@ loop do
 			request_type = client.gets( "\n" ).chomp( "\n" )
 			puts "request:" + request_type + ";"
 			if(request_type.match(/GET/i))
-				puts "ok here you are\n"
 				parts = request_type.split ":"
+				puts "ok here you are #{parts[1]} \n"
 				sender parts[1], client
 			end
 			if(request_type.match(/PUT/i))
-				puts "give me something\n"
 				parts = request_type.split ":"
+				puts "give me something #{parts[1]}\n"
 				receiver parts[1], client
 			end
 	end
