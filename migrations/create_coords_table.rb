@@ -12,5 +12,6 @@ ActiveRecord::Schema.define do
         table.column :time, :datetime
 		table.column :ms, :integer
 		table.column :sent, :boolean
-	end
+        table.column :check, :boolean
+    end
 end
